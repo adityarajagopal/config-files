@@ -2,9 +2,6 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
 call plug#begin()
-    "Plug 'junegunn/fzf', { 'do' : { -> fzf#install() } }
-    "Plug 'Shougo/defx.nvim'
-    "Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/vim-easy-align'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'tpope/vim-surround'

@@ -9,6 +9,8 @@ call plug#begin()
     Plug 'kshenoy/vim-signature'
     Plug 'bling/vim-bufferline'
     Plug 'mhartington/oceanic-next'
+    Plug 'mbbill/undotree'
+    Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 "Settings from vimrc"
@@ -33,6 +35,8 @@ set hlsearch
 :nmap <c-k> <c-w>k
 :nmap <c-l> <c-w>l
 :nmap :vb :vertical sb
+:nnoremap <c-q> :UndotreeToggle<CR>
+imap <C-c> <Esc>
 nnoremap <silent> :E :Explore
 nnoremap <leader>b :b
 set hidden

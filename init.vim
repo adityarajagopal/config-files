@@ -11,6 +11,7 @@ call plug#begin()
     Plug 'mhartington/oceanic-next'
     Plug 'mbbill/undotree'
     Plug 'plasticboy/vim-markdown'
+    Plug 'lervag/vimtex'
 call plug#end()
 
 "Settings from vimrc"

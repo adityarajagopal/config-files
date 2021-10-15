@@ -157,16 +157,16 @@ bindsym $mod+control+k move workspace to output up
 
 # configure workspaces
 # exec xrandr --output DP-1 --auto --output HDMI-1-3 --auto --rotate left --left-of DP-1 --output DP-2 --auto --rotate right --right-of DP-1 --output VGA-1-0 --auto --rotate inverted --above DP-1
-exec xrandr --output DP-1 --auto --output HDMI-1-3 --auto --rotate left --left-of DP-1 --output DP-2 --auto --rotate right --right-of DP-1 
+exec xrandr --output DP1 --auto --output DP2 --auto --rotate left --left-of DP1 --output DVI-I-1-1 --auto --rotate right --right-of DP1
 
 # set workspaces to default outputs
-workspace $ws8 output DP-2
-workspace $ws9 output HDMI-1-3 
-workspace $ws10 output DP-2 
-workspace $wsn1 output HDMI-1-3 
-workspace $ws1 output HDMI-1-3
-workspace $ws2 output DP-1
-workspace $ws3 output DP-2
+workspace $ws8 output DP2
+# workspace $ws9 output HDMI-1-3 
+workspace $ws10 output DP2 
+# workspace $wsn1 output HDMI-1-3 
+# workspace $ws1 output HDMI-1-3
+workspace $ws2 output DP1
+workspace $ws3 output DP2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

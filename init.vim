@@ -12,6 +12,7 @@ call plug#begin()
     Plug 'mbbill/undotree'
     Plug 'plasticboy/vim-markdown'
     Plug 'lervag/vimtex'
+    Plug 'vimwiki/vimwiki'
 call plug#end()
 
 "Settings from vimrc"
@@ -61,6 +62,11 @@ autocmd VimEnter *
 
 let g:python_host_prog = '/usr/bin/python2.7'
 let g:python3_host_prog = '/usr/bin/python3.6'
+
+let g:vimtex_compiler_latexmk = {'build_dir' : './aux'}
+let g:vimtex_view_method = 'zathura'
+
+let g:vimwiki_list = [{'path': '~/Documents/personal.wiki'}]
 
 
 

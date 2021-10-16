@@ -12,6 +12,7 @@ call plug#begin()
     Plug 'mbbill/undotree'
     Plug 'plasticboy/vim-markdown'
     Plug 'lervag/vimtex'
+    Plug 'vimwiki/vimwiki'
 call plug#end()
 
 "Settings from vimrc"
@@ -41,6 +42,7 @@ imap <C-c> <Esc>
 nnoremap <silent> :E :Explore
 nnoremap <leader>b :b
 set hidden
+set completeopt=longest,menuone
 
 "FZF customisations"
 nnoremap <silent> <leader>f :FZF
@@ -62,7 +64,16 @@ autocmd VimEnter *
 let g:python_host_prog = '/usr/bin/python2.7'
 let g:python3_host_prog = '/usr/bin/python3.6'
 
+"vim-tex plugins"
+let g:vimtex_fold_enabled = 1
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_complete_bib_simple = 1
+let g:vimtex_compiler_latexmk = {
+            \ 'build_dir' : 'aux',
+            \}
 
+autocmd FileType tex set spell spelllang=en_gb
 
 
 

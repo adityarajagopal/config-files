@@ -39,9 +39,15 @@ function setupBash {
 }
 export -f setupBash
 
+function setupNix {
+  echo "Setting up nix ... "
+  source setup_nix.sh
+}
+export -f setupNix
+
 cloneRepo
 [[ $@ =~ 'v' ]] && setupVim
 [[ $@ =~ 'i3' ]] && setupI3
 [[ $@ =~ 'b' ]] && setupBash
 [[ $@ =~ 't' ]] && setupTmux
-
+[[ $@ =~ 'n' ]] && setupNix

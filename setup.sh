@@ -20,8 +20,8 @@ export -f setupTmux
 
 function setupVim {
   echo "Setting up vim config ... "
-  ln -sf $install_dir/$repo_name/init.vim ~/.config/nvim/init.vim
-  ls -l ~/.config/nvim/init.vim
+  ln -sf $install_dir/$repo_name/nvim ~/.config/nvim
+  ls -l ~/.config/nvim
   nvim -c ":PlugInstall"
 }
 export -f setupVim

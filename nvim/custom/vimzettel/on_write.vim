@@ -1,0 +1,2 @@
+:ZettelBackLinks
+:VimwikiAll2HTML

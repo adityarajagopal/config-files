@@ -35,7 +35,7 @@ export -f setupI3
 
 function setupBash {
   echo "Setting up bash config ... "
-  [[ ! $0 =~ "bash" ]] && echo "Setup bashrc to be primary shell first with oh-my-bash"
+  setup_bash.sh
 }
 export -f setupBash
 

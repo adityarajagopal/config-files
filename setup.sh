@@ -35,7 +35,7 @@ export -f setupI3
 
 function setupBash {
   echo "Setting up bash config ... "
-  setup_bash.sh
+  source setup_bash.sh
 }
 export -f setupBash
 

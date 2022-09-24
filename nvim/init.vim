@@ -48,7 +48,7 @@ imap <C-c> <Esc>
 :nmap <c-j> <c-w>j
 :nmap <c-k> <c-w>k
 :nmap <c-l> <c-w>l
-:nmap <c-p> :FZF ~/<CR>
+:nmap <c-p> :FZF <CR>
 nnoremap <leader>b :b
 :nmap :vb :vertical sb
 nnoremap <silent> :E :Explore

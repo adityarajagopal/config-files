@@ -22,6 +22,11 @@ function setupVim {
   echo "Setting up vim config ... "
   ln -sf $install_dir/$repo_name/nvim ~/.config/nvim
   ls -l ~/.config/nvim
+  if [[ ! -d ~/.fzf ]]
+  then 
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+  fi
   nvim -c ":PlugInstall"
 }
 export -f setupVim

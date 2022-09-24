@@ -177,9 +177,9 @@ bindsym $mod+control+k move workspace to output up
 # set $screen_right "DP-2"
 # exec xrandr --output $screen_center --auto --rotate normal --output $screen_left --auto --rotate left --left-of $screen_center --output $screen_right --auto --rotate left --right-of $screen_center
 
-set $screen_left "DP-1"
+set $screen_right "DP-1"
 set $screen_center "DP-1-3"
-set $screen_right "DP-1-4"
+set $screen_left "DP-1-4"
 exec xrandr --output $screen_center --auto --rotate normal --output $screen_left --auto --rotate left --left-of $screen_center --output $screen_right --auto --rotate right --right-of $screen_center
 
 workspace $wsn1 output $screen_left 

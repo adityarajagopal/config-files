@@ -48,7 +48,7 @@ imap <C-c> <Esc>
 :nmap <c-j> <c-w>j
 :nmap <c-k> <c-w>k
 :nmap <c-l> <c-w>l
-:nmap <c-p> :FZF <CR>
+:nmap <c-p> :FZF <CR> 
 nnoremap <leader>b :b
 :nmap :vb :vertical sb
 nnoremap <silent> :E :Explore
@@ -83,6 +83,12 @@ let g:vimtex_compiler_latexmk = {
             \ 'build_dir' : 'aux',
             \}
 nnoremap <leader>toc :VimtexTocOpen
+"general begin end completion with current word
+noremap <silent> <leader>b caw\begin{<C-R>"}<CR>\end{<C-R>"}
+"specific begin minipage
+noremap <silent> <leader>bmp i\begin{minipage}{\linewidth}<CR>\scriptsize<CR>\end{minipage}
+"specific begin frame
+noremap <silent> <leader>bf i\begin{frame}{}<CR>\end{frame}
 
 autocmd FileType tex set spell spelllang=en_gb
 autocmd FileType tex hi clear SpellBad 

@@ -32,3 +32,6 @@ queryMerlin(){
     grep -nR $1 "/home/ar4414/.opam/default/share/merlin/vim/"
 }
 alias qmerlin=queryMerlin
+
+alias vsim=/opt/intelFPGA/18.1/modelsim_ase/bin/vsim
+

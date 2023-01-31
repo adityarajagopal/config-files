@@ -1,2 +1,2 @@
-:ZettelBackLinks
-:VimwikiAll2HTML
+silent! :ZettelBackLinks
+silent! :VimwikiAll2HTML

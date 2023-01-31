@@ -5,6 +5,30 @@
       "args": ["--lsp"],
       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
       "filetypes": ["haskell", "lhaskell"]
+    },
+    "racket": {
+      "command": "racket",
+      "args": ["-l", "racket-langserver"],
+      "filetypes": ["scheme", "racket"]
+    },
+    "vhdl": {
+      "command": "vhdl-tool",
+      "args": ["lsp"],
+      "filetypes": ["vhdl"]
     }
-  }
+  },
+  "suggest": {
+     "disableKind": true,
+     "snippetsSupport": false
+   },
+   "diagnostic": {
+     "virtualText": true,
+     "virtualTextCurrentLineOnly": false,
+     "virtualTextLines": 1,
+     "virtualTextPrefix": " —— "
+   },
+   "list.height": 20,
+   "codeLens.enable": true,
+   "coc.preferences.enableMarkdown": true,
+   "coc.preferences.jumpCommand": "tab drop" 
 }

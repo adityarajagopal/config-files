@@ -3,7 +3,7 @@ export OSH=/home/ar4414/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="minimal"
+OSH_THEME="half-life"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,6 +51,7 @@ completions=(
   git
   composer
   ssh
+  pass
 )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
@@ -71,9 +72,11 @@ plugins=(
 )
 
 source $OSH/oh-my-bash.sh
-source /home/ar4414/.bashrc.pre-oh-my-bash
+# source /home/ar4414/.bashrc.pre-oh-my-bash
 
 export PYTHONBREAKPOINT="pudb.set_trace"
+
+export PATH=/opt/intelFPGA/18.1/modelsim_ase/bin/:$PATH
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -118,8 +121,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+set -o vi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 
 # opam configuration
 test -r /home/ar4414/.opam/opam-init/init.sh && . /home/ar4414/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true

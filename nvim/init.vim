@@ -20,11 +20,19 @@ call plug#begin()
     Plug 'voldikss/vim-floaterm'
     Plug '/home/ar4414/.opam/default/share/merlin/vim'
     Plug 'neoclide/coc.nvim', {'branch':'release'}
+    Plug 'LnL7/vim-nix'
+    Plug 'rhysd/vim-grammarous'
+    " Haskell plugins
+    Plug 'neovimhaskell/haskell-vim'
+    " Racket plugins
+    Plug 'benknoble/vim-racket'
+    Plug 'gpanders/nvim-parinfer'
+    Plug 'Olical/conjure'
 call plug#end()
 
 "Settings from vimrc"
 set nocompatible
-syntax enable
+syntax on
 filetype plugin indent on
 set background=dark
 colorscheme OceanicNext
@@ -54,6 +62,8 @@ nnoremap <leader>b :b
 nnoremap <silent> :E :Explore
 :nnoremap <c-q> :UndotreeToggle<CR>
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+:noremap <Leader>y "*y
+:let maplocalleader = ";"
 
 "vim-surround customisations"
 let b:surround_{char2nr('c')} = "#{{{\r#}}}"
@@ -115,3 +125,31 @@ let $FZF_DEFAULT_COMMAND='ag --hidden -l -g ""'
 
 "ocaml-lsp merlin settings
 let no_ocaml_maps=1
+
+"coc shortcuts"
+map <Leader>ggd <Plug>(coc-definition)
+map <Leader>ggi <Plug>(coc-implementation)
+map <Leader>ggt <Plug>(coc-type-definition)
+map <Leader>gh :call CocActionAsync('doHover')<cr>
+map <Leader>gn <Plug>(coc-diagnostic-next)
+map <Leader>gp <Plug>(coc-diagnostic-prev)
+map <Leader>gr <Plug>(coc-references)
+
+map <Leader>rn <Plug>(coc-rename)
+map <Leader>rf <Plug>(coc-refactor)
+map <Leader>qf <Plug>(coc-fix-current)
+
+map <Leader>al <Plug>(coc-codeaction-line)
+map <Leader>ac <Plug>(coc-codeaction-cursor)
+map <Leader>ao <Plug>(coc-codelens-action)
+
+nnoremap <Leader>kd :<C-u>CocList diagnostics<Cr>
+nnoremap <Leader>kc :<C-u>CocList commands<Cr>
+nnoremap <Leader>ko :<C-u>CocList outline<Cr>
+nnoremap <Leader>kr :<C-u>CocListResume<Cr>
+
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')

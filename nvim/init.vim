@@ -2,10 +2,10 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
 call plug#begin()
+    " Plug 'neoclide/coc.nvim', {'branch':'release'}
+    Plug 'neovim/nvim-lspconfig'
     Plug 'junegunn/vim-easy-align'
-    Plug 'terryma/vim-multiple-cursors'
     Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-fugitive'
     Plug 'kshenoy/vim-signature'
     Plug 'bling/vim-bufferline'
     Plug 'mhartington/oceanic-next'
@@ -19,9 +19,9 @@ call plug#begin()
     Plug 'michal-h21/vim-zettel'
     Plug 'voldikss/vim-floaterm'
     Plug '/home/ar4414/.opam/default/share/merlin/vim'
-    Plug 'neoclide/coc.nvim', {'branch':'release'}
     Plug 'LnL7/vim-nix'
     Plug 'rhysd/vim-grammarous'
+    Plug 'vim-airline/vim-airline'
     " Haskell plugins
     Plug 'neovimhaskell/haskell-vim'
     " Racket plugins
@@ -109,6 +109,7 @@ let g:vimwiki_list = [{'path': '/home/ar4414/Documents/zettelkasten'}]
 let g:zettel_format = "%y%m%d%H%M_%title"
 let g:zettel_default_title = ""
 let g:zettel_options = [{"template" : "~/.config/nvim/custom/vimzettel/new_note.tpl"}]
+noremap <silent> <leader>zn = :ZettelNew
 
 "floatterm commands
 nnoremap <silent> <leader>tn :FloatermNew<CR>
@@ -126,30 +127,71 @@ let $FZF_DEFAULT_COMMAND='ag --hidden -l -g ""'
 "ocaml-lsp merlin settings
 let no_ocaml_maps=1
 
+lua << EOF
+  -- Mappings.
+  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  local opts = { noremap=true, silent=true }
+  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+  
+  -- Use an on_attach function to only map the following keys
+  -- after the language server attaches to the current buffer
+  local on_attach = function(client, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  end
+  
+  require('lspconfig')['hls'].setup{
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+    on_attach = on_attach
+  }
+EOF
+
 "coc shortcuts"
-map <Leader>ggd <Plug>(coc-definition)
-map <Leader>ggi <Plug>(coc-implementation)
-map <Leader>ggt <Plug>(coc-type-definition)
-map <Leader>gh :call CocActionAsync('doHover')<cr>
-map <Leader>gn <Plug>(coc-diagnostic-next)
-map <Leader>gp <Plug>(coc-diagnostic-prev)
-map <Leader>gr <Plug>(coc-references)
-
-map <Leader>rn <Plug>(coc-rename)
-map <Leader>rf <Plug>(coc-refactor)
-map <Leader>qf <Plug>(coc-fix-current)
-
-map <Leader>al <Plug>(coc-codeaction-line)
-map <Leader>ac <Plug>(coc-codeaction-cursor)
-map <Leader>ao <Plug>(coc-codelens-action)
-
-nnoremap <Leader>kd :<C-u>CocList diagnostics<Cr>
-nnoremap <Leader>kc :<C-u>CocList commands<Cr>
-nnoremap <Leader>ko :<C-u>CocList outline<Cr>
-nnoremap <Leader>kr :<C-u>CocListResume<Cr>
-
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" map <Leader>ggd <Plug>(coc-definition)
+" map <Leader>ggi <Plug>(coc-implementation)
+" map <Leader>ggt <Plug>(coc-type-definition)
+" map <Leader>gh :call CocActionAsync('doHover')<cr>
+" map <Leader>gn <Plug>(coc-diagnostic-next)
+" map <Leader>gp <Plug>(coc-diagnostic-prev)
+" map <Leader>gr <Plug>(coc-references)
+" 
+" map <Leader>rn <Plug>(coc-rename)
+" map <Leader>rf <Plug>(coc-refactor)
+" map <Leader>qf <Plug>(coc-fix-current)
+" 
+" map <Leader>al <Plug>(coc-codeaction-line)
+" map <Leader>ac <Plug>(coc-codeaction-cursor)
+" map <Leader>ao <Plug>(coc-codelens-action)
+" 
+" nnoremap <Leader>kd :<C-u>CocList diagnostics<Cr>
+" nnoremap <Leader>kc :<C-u>CocList commands<Cr>
+" nnoremap <Leader>ko :<C-u>CocList outline<Cr>
+" nnoremap <Leader>kr :<C-u>CocListResume<Cr>
+" 
+" inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+" 
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
